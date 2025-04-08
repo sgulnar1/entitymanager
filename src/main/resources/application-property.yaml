@@ -1,0 +1,10 @@
+product:
+  name: terevez
+  categories:
+    - id: 1
+      name: badimcan
+    - id: 2
+      name: pomidor
+  sales:
+    terevez : 20
+    meyve : 10
