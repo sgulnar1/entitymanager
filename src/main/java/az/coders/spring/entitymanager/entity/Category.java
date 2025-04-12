@@ -15,8 +15,12 @@ public class Category {
     private int id;
     @Column(name = "category_name")
     private String name;
-//    @OneToMany
-//    private List<Product> product;
+    @OneToMany(mappedBy = "id", fetch = FetchType.EAGER)
+//    @JoinTable(name = "categories_products",
+//            joinColumns = @JoinColumn(name = "category_id"),
+//            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> product;
+
     public int getId() {
         return id;
     }
@@ -43,5 +47,22 @@ public class Category {
 
     public Category(int id) {
         this.id = id;
+    }
+
+    public List<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<Product> product) {
+        this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+              //  ", product=" + product +
+                '}';
     }
 }

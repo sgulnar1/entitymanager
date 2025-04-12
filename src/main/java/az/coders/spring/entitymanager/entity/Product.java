@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.experimental.FieldNameConstants;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "products")
 @FieldNameConstants
@@ -21,10 +24,16 @@ public class Product {
     @Transient
     private String test;
     private double price;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private ProductDetail productDetail;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
     private Category category;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//        @JoinTable(name = "orders_products",
+//            joinColumns = @JoinColumn(name = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Order> orders;
 
     public Product(String productName, ProductDetail productDetail, Category category) {
         this.productName = productName;
@@ -79,6 +88,8 @@ public class Product {
                 ", test='" + test + '\'' +
                 ", price=" + price +
                 ", productDetail=" + productDetail +
+                ", category=" + category +
+                ", orders=" + orders +
                 '}';
     }
 
@@ -89,5 +100,21 @@ public class Product {
     }
 
     public Product() {
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -23,4 +23,12 @@ public class ProductDetail {
 
     public ProductDetail() {
     }
+
+    @Override
+    public String toString() {
+        return "ProductDetail{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
