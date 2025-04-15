@@ -1,5 +1,5 @@
 package az.coders.spring.entitymanager.service.impl;
-
+import java.lang.*;
 import az.coders.spring.entitymanager.entity.Product;
 import az.coders.spring.entitymanager.repository.ProductRepository;
 import az.coders.spring.entitymanager.service.ProductService;
@@ -12,7 +12,7 @@ import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import az.coders.spring.entitymanager.annotation.Readable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +60,12 @@ public class ProductServiceImpl implements ProductService {
 //        entityManager.getTransaction().commit();
 
         //productRepository.save(product);
+    }
+
+    @Override
+    @Readable
+    public List<Product> getProductsByName2(String name) {
+        return List.of();
     }
 
     @Override

@@ -2,6 +2,7 @@ package az.coders.spring.entitymanager;
 
 import az.coders.spring.entitymanager.entity.*;
 import az.coders.spring.entitymanager.repository.CategoryRepository;
+import az.coders.spring.entitymanager.repository.CustomerRepository;
 import az.coders.spring.entitymanager.repository.ProductDetailRepository;
 import az.coders.spring.entitymanager.repository.ProductRepository;
 import az.coders.spring.entitymanager.service.ProductService;
@@ -19,7 +20,7 @@ import java.util.Set;
 
 @SpringBootApplication
 public class EntitymanagerApplication implements CommandLineRunner {
-//    @Value("${product.categories[0].id}")
+    //    @Value("${product.categories[0].id}")
 //    List<Category> categories;
     @Autowired
     ProductRepository productRepository;
@@ -29,16 +30,18 @@ public class EntitymanagerApplication implements CommandLineRunner {
     ProductDetailRepository productDetailRepository;
     @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(EntitymanagerApplication.class, args);
     }
 
     @Override
-    //@Transactional
+   @Transactional(readOnly = true)
     public void run(String... args) throws Exception {
-     //   System.out.println("categories: " + categories);
- //       ProductDetail productDetail = new ProductDetail("desc 3");
+        //   System.out.println("categories: " + categories);
+        //       ProductDetail productDetail = new ProductDetail("desc 3");
 //        Category category = new Category(4);
 //        Product product = new Product("test new 3", productDetail, category);
 //        //productDetailRepository.save(productDetail);
@@ -67,6 +70,15 @@ public class EntitymanagerApplication implements CommandLineRunner {
 //        //many to many olanda ortaq cedvele save getmir
 //        product2.setOrders(Set.of(order, order2));
 //        productRepository.save(product2);
-        productService.getProductsByName("name").forEach(System.out::println);
+        //      productService.getProductsByName2("name");
+        Customer customer = new Customer();
+        customer.setName("A3");
+        customerRepository.findById(4);
+        if (1 == 1)
+            throw new Exception();
+        Customer customer2 = new Customer();
+        customer.setName("A4");
+        customerRepository.save(customer2);
+
     }
 }

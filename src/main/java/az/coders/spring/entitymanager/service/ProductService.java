@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface ProductService {
     void save(Product product);
+    List<Product> getProductsByName2(String name);
 
     List<Product> getProductsByName(String name);
 }
